@@ -56,8 +56,9 @@ class NarBundle:
         manifest_dir = "META-INF"
         self.mkdir(manifest_dir)
 
-        current_timestamp = datetime.datetime.now(datetime.UTC)
+        current_timestamp = datetime.datetime.now(datetime.timezone.utc)  
         build_timestamp = current_timestamp.strftime(self.BUILD_TIMESTAMP_FORMAT)
+
 
         manifest_lines = [
             "Manifest-Version: 1.0",
