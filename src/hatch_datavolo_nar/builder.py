@@ -13,7 +13,7 @@ from shlex import quote
 from shutil import rmtree
 from subprocess import PIPE, check_call
 from typing import Any
-from zipfile import ZIP_DEFLATED, ZipFile
+from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo # Import ZipInfo for Python 3.9
 
 from hatchling.builders.config import BuilderConfig
 from hatchling.builders.plugin.interface import BuilderInterface
@@ -47,7 +47,10 @@ class NarBundle:
 
     def mkdir(self, directory_name: str) -> None:
         directory_mode = self.DIRECTORY_MODE
-        self.zip_descriptor.mkdir(directory_name, mode=directory_mode)
+        # Python 3.9 compatible way to create directories in zip files
+        dir_info = ZipInfo(directory_name + '/')  
+        dir_info.external_attr = directory_mode << 16 
+        self.zip_descriptor.writestr(dir_info, '')
 
     def write_manifest(self, metadata: ProjectMetadata) -> None:
         manifest_dir = "META-INF"
