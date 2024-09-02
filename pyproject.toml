@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "hatch-datavolo-nar"
 dynamic = ["version"]
 description = "Hatch plugin for building Apache NiFi NAR bundles"
-requires-python = ">=3.11"
+requires-python = ">=3.9"  # Changed to support 3.9 and above
 keywords = ["hatch", "nar", "datavolo", "nifi"]
 license = { file = "LICENSE" }
 readme = "README.md"
@@ -21,6 +21,11 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Intended Audience :: Developers",
     "Programming Language :: Python",
+    "Programming  
+
+ Language :: Python :: 3.9",  
+  # Added 3.9 support
+    "Programming Language :: Python :: 3.10", # Added 3.10 support
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Framework :: Hatch",
@@ -56,7 +61,8 @@ cov = [
 ]
 
 [[tool.hatch.envs.all.matrix]]
-python = ["3.11", "3.12"]
+python  
+ = ["3.9", "3.10", "3.11", "3.12"]  # Added 3.9 and 3.10
 
 [tool.hatch.envs.types]
 dependencies = [
