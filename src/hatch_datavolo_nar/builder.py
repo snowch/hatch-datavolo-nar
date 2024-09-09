@@ -48,9 +48,9 @@ class NarBundle:
     def mkdir(self, directory_name: str) -> None:
         directory_mode = self.DIRECTORY_MODE
         # Python 3.9 compatible way to create directories in zip files
-        dir_info = ZipInfo(directory_name + '/')
+        dir_info = ZipInfo(directory_name + "/")
         dir_info.external_attr = directory_mode << 16
-        self.zip_descriptor.writestr(dir_info, '')
+        self.zip_descriptor.writestr(dir_info, "")
 
     def write_manifest(self, metadata: ProjectMetadata) -> None:
         manifest_dir = "META-INF"
@@ -58,7 +58,6 @@ class NarBundle:
 
         current_timestamp = datetime.datetime.now(datetime.timezone.utc)
         build_timestamp = current_timestamp.strftime(self.BUILD_TIMESTAMP_FORMAT)
-
 
         manifest_lines = [
             "Manifest-Version: 1.0",
