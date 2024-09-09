@@ -56,7 +56,12 @@ class NarBundle:
         manifest_dir = "META-INF"
         self.mkdir(manifest_dir)
 
-        current_timestamp = datetime.datetime.now(datetime.timezone.utc)
+        # Version-agnostic way to get UTC timezone
+        if sys.version_info >= (3, 11):
+            current_timestamp = datetime.datetime.now(datetime.timezone.utc)
+        else:
+            current_timestamp = datetime.datetime.now(datetime.timezone(datetime.timedelta(0))) 
+
         build_timestamp = current_timestamp.strftime(self.BUILD_TIMESTAMP_FORMAT)
 
         manifest_lines = [
