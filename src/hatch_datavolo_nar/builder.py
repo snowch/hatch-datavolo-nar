@@ -60,7 +60,7 @@ class NarBundle:
         if sys.version_info >= (3, 11):
             current_timestamp = datetime.datetime.now(datetime.timezone.utc)
         else:
-            current_timestamp = datetime.datetime.now(datetime.timezone(datetime.timedelta(0))) 
+            current_timestamp = datetime.datetime.now(datetime.timezone(datetime.timedelta(0)))
 
         build_timestamp = current_timestamp.strftime(self.BUILD_TIMESTAMP_FORMAT)
 
