@@ -156,7 +156,12 @@ def assert_manifest_found(nar: ZipFile, project_name: str, project_version: str)
     manifest_binary = nar.read("META-INF/MANIFEST.MF")
     manifest = str(manifest_binary, encoding="utf-8")
 
-    now = datetime.datetime.now(datetime.UTC)
+    # Version-agnostic way to get UTC timezone
+    if sys.version_info >= (3, 11):
+        now = datetime.datetime.now(datetime.timezone.utc)
+    else:
+        now = datetime.datetime.now(datetime.timezone(datetime.timedelta(0)))
+
     partial_timestamp = now.strftime("%Y-%m-%dT")
 
     assert "Manifest-Version: 1.0" in manifest
